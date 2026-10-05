@@ -1,0 +1,61 @@
+{
+	"$schema": "./node_modules/@emdash-cms/plugin-cli/schemas/emdash-plugin.schema.json",
+
+	"slug": "dynamic-qr",
+	"name": "Dynamic QR",
+	"publisher": "did:plc:suw5qc22clrlpslfo6qapiu4",
+	"version": "0.2.0",
+
+	"license": "MIT",
+	"author": { "name": "Nookesh", "email": "nookesh@qranalytica.com" },
+	"security": { "email": "nookesh@qranalytica.com" },
+	"description": "Dynamic QR codes with scan analytics and customizable styling for EmDash.",
+	"keywords": ["qr", "qr-code", "analytics", "redirect", "tracking"],
+	"repo": "https://github.com/nookeshkarri7/emdash-dynamic-qr",
+
+	"capabilities": [],
+	"allowedHosts": [],
+	"storage": {
+		"codes": {
+			"indexes": ["createdAt", "enabled", ["enabled", "createdAt"]],
+			"uniqueIndexes": ["slug"]
+		},
+		"scans": {
+			"indexes": ["codeId", "createdAt", ["codeId", "createdAt"], "country"]
+		}
+	},
+
+	"admin": {
+		"pages": [
+			{ "path": "/codes", "label": "QR codes", "icon": "link" },
+			{ "path": "/analytics", "label": "Analytics", "icon": "chart" },
+			{ "path": "/settings", "label": "Settings", "icon": "settings" }
+		],
+		"widgets": [
+			{ "id": "qr-overview", "title": "Dynamic QR", "size": "half" }
+		],
+		"settingsSchema": {
+			"publicBaseUrl": {
+				"type": "string",
+				"label": "Public site base URL",
+				"description": "Used to build scan and image URLs (e.g. https://example.com)"
+			},
+			"defaultFg": {
+				"type": "string",
+				"label": "Default foreground color",
+				"default": "#000000"
+			},
+			"defaultBg": {
+				"type": "string",
+				"label": "Default background color",
+				"default": "#ffffff"
+			},
+			"defaultEcc": {
+				"type": "string",
+				"label": "Default error correction",
+				"description": "L | M | Q | H",
+				"default": "M"
+			}
+		}
+	}
+}
